@@ -54,7 +54,7 @@ export default scene => {
     function update(time) {
         const angle = time*speed;
 
-        group.rotation.y = angle;
+        //group.rotation.y = angle;
 
         subjectMaterial.alphaMap.offset.y = 0.55 + time * textureOffsetSpeed;
 

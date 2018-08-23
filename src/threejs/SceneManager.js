@@ -25,28 +25,32 @@ export default canvas => {
         y: 0
     }
 
-   // alert('hello SM 2');
-
-
     const scene = buildScene();
 
-    // alert('hello SM 3');
-
     const renderer = buildRender(screenDimensions);
-    const camera = buildCamera(screenDimensions);//alert('hello SM 4');
+    const camera = buildCamera(screenDimensions);
     const sceneSubjects = createSceneSubjects(scene);
 
 
     renderer.setClearColor(new THREE.Color(0xEEEEEE));
 	renderer.setSize(window.innerWidth, window.innerHeight);
 
+    
+    // var controls = new THREE.TrackballControls( camera );
+    // controls.rotateSpeed = 1.0;
+    // controls.zoomSpeed = 1.2;
+    // controls.panSpeed = 0.8;
+    // controls.noZoom = false;
+    // controls.noPan = false;
+    // controls.staticMoving = true;
+    // controls.dynamicDampingFactor = 0.3;
+    // controls.keys = [ 65, 83, 68 ];
+    //controls.addEventListener( 'change', update );
+    var OrbitControls = require('three-orbit-controls')(THREE)
+    var controls = new OrbitControls( camera );
 
-    //('hello SM 4');
-
-    camera.position.x = -30;
-    camera.position.y = 40;
-    camera.position.z = 30;
-    camera.lookAt(scene.position);
+    controls.update();
+    
 
     renderer.render(scene, camera);
 
@@ -71,12 +75,20 @@ export default canvas => {
 
     function buildCamera({ width, height }) {
         const aspectRatio = width / height;
-        const fieldOfView = 60;
-        const nearPlane = 4;
-        const farPlane = 100; 
+        const fieldOfView = 45; //60
+        const nearPlane = 1; //4
+        const farPlane = 1000; //100
+        // const camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, 4, 100 )
         const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-        //const camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, 4, 100 )
-        camera.position.z = 0;
+        camera.position.set(50, 80, 130 );
+        // camera.position.x = -30;
+        // camera.position.y = 40;
+        // camera.position.z = 30;
+
+        // camera.lookAt(origin);
+        camera.lookAt(scene.position);
+
+        
 
         return camera;
     }
@@ -84,15 +96,26 @@ export default canvas => {
     function createSceneSubjects(scene) {
         const sceneSubjects = [
             new GeneralLights(scene),
-            new SceneSubject(scene),
-            new Rafter(scene, 11),
-            new Ground(scene)
+            //new SceneSubject(scene),
+            new Rafter(scene, 11)
+            //new Ground(scene)
         ];
 
-        var geometry = new THREE.PlaneBufferGeometry( 1000, 1000 );
+
+        var rollOverGeo = new THREE.BoxBufferGeometry( 25, 25, 25 );
+        var rollOverMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, opacity: 0.5, transparent: true } );
+        var rollOverMesh = new THREE.Mesh( rollOverGeo, rollOverMaterial );
+        scene.add( rollOverMesh );
+
+        var geometry = new THREE.PlaneBufferGeometry( 100, 100 );
         geometry.rotateX( - Math.PI / 2 );
         var plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { visible: true } ) );
         scene.add( plane );
+
+        // var geometry2 = new THREE.PlaneBufferGeometry( 10, 10 );
+        // geometry2.rotateX( - Math.PI / 2 );
+        // var plane2 = new THREE.Mesh( geometry2, new THREE.MeshBasicMaterial( { color: 0xFF1111, visible: true } ) );
+        // scene.add( plane2 );
 
         //alert('hello end create subj-s');
 
@@ -105,7 +128,8 @@ export default canvas => {
         for(let i=0; i<sceneSubjects.length; i++)
             sceneSubjects[i].update(elapsedTime);
 
-        updateCameraPositionRelativeToMouse();
+        // updateCameraPositionRelativeToMouse();
+        controls.update();
 
         renderer.render(scene, camera);
     }

@@ -9,8 +9,15 @@ export default scene => {
     const lightOut = new THREE.PointLight("#2196F3", 10, 30);
     lightOut.position.set(40,20,40);
 
-    scene.add(lightIn);
-    scene.add(lightOut);
+    //scene.add(lightIn);
+    //scene.add(lightOut);
+
+    var ambientLight = new THREE.AmbientLight( 0x606060 );
+    scene.add( ambientLight );
+
+    var directionalLight = new THREE.DirectionalLight( 0xffffff );
+    directionalLight.position.set( 1, 0.75, 0.5 ).normalize();
+    scene.add( directionalLight );
 
     const rad = 80;
 
