@@ -2,15 +2,13 @@ import SceneManager from './SceneManager';
 
 export default container => {
 
-    //alert('hello three entry');
+    
 
     const canvas = createCanvas(document, container);
     const sceneManager = new SceneManager(canvas);
 
     let canvasHalfWidth;
     let canvasHalfHeight;
-
-   // alert('hello 3 entry 23');
 
 
     bindEventListeners();

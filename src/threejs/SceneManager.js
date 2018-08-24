@@ -2,6 +2,7 @@
 import SceneSubject from './SceneSubject';
 import GeneralLights from './GeneralLights';
 import Rafter from './Rafter';
+import RafterTop from './RafterTop';
 import Ground from './Ground';
 
 
@@ -94,16 +95,25 @@ export default canvas => {
     }
 
     function createSceneSubjects(scene) {
-        const sceneSubjects = [
+        var sceneSubjects = [
             new GeneralLights(scene),
             //new SceneSubject(scene),
-            new Rafter(scene, 11)
+            new Rafter(scene, 0)
             //new Ground(scene)
         ];
 
+        var axis = new THREE.AxesHelper(100);
+        scene.add(axis);
 
-        var rollOverGeo = new THREE.BoxBufferGeometry( 25, 25, 25 );
-        var rollOverMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, opacity: 0.5, transparent: true } );
+        var size = 100;
+        var divisions = 10;
+
+        var gridHelper = new THREE.GridHelper( size, divisions );
+        scene.add( gridHelper );
+
+
+        var rollOverGeo = new THREE.BoxBufferGeometry( 20, 20, 20 );
+        var rollOverMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.5, transparent: true } );
         var rollOverMesh = new THREE.Mesh( rollOverGeo, rollOverMaterial );
         scene.add( rollOverMesh );
 
@@ -112,14 +122,42 @@ export default canvas => {
         var plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { visible: true } ) );
         scene.add( plane );
 
-        // var geometry2 = new THREE.PlaneBufferGeometry( 10, 10 );
-        // geometry2.rotateX( - Math.PI / 2 );
-        // var plane2 = new THREE.Mesh( geometry2, new THREE.MeshBasicMaterial( { color: 0xFF1111, visible: true } ) );
-        // scene.add( plane2 );
+        //sceneSubjects.push(new Rafter(scene, 2));
+        // sceneSubjects.push(new Rafter(scene, 4));
+        // sceneSubjects.push(new Rafter(scene, 6));
+        // sceneSubjects.push(new Rafter(scene, 8));
+        // sceneSubjects.push(new Rafter(scene, 10));
 
-        //alert('hello end create subj-s');
+        sceneSubjects = generateRafters(sceneSubjects, 10, -10, 2);
+
+
+        var yOffset = 0.5;
+        var y = 20 - yOffset;
+        sceneSubjects.push(new RafterTop(scene, y))
 
         return sceneSubjects;
+    }
+
+    function generateRafters(arr, n, startPos, step) {
+
+        var angle1 = - Math.PI / 4;
+        var angle2 = Math.PI / 4;
+
+        var zOffset = 0.5;
+        var z1 = - (5 + zOffset);
+        var z2 = 5 + zOffset;
+
+        var yOffset = 0.5;
+        var y = 15 - yOffset;
+
+
+        for(let i=0; i<n+1; i++)
+            arr.push(new Rafter(scene, startPos + i*step, y, z1, angle1));   
+
+        for(let i=0; i<n+1; i++)
+            arr.push(new Rafter(scene, startPos + i*step, y, z2, angle2));
+        
+        return arr;
     }
 
     function update() {

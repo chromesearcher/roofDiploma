@@ -1,18 +1,16 @@
 
-export default (scene, len) => {    
+export default (scene, x, y, z, angle) => {    
 
     var THREE = require('three');   
 
-    var boxGeometry = new THREE.BoxGeometry(1, 0.2, len);
-    var boxMaterial = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: false, side: THREE.DoubleSide});
+    var boxGeometry = new THREE.BoxGeometry(1, 0.2, 10*Math.sqrt(2));
+    boxGeometry.rotateX( angle )
+    var boxMaterial = new THREE.MeshBasicMaterial({color: 0xc93c20, wireframe: false, side: THREE.DoubleSide});
     var box = new THREE.Mesh(boxGeometry, boxMaterial);
-    box.position.x = 0;
-    box.position.y = 0;
-    box.position.z = 0;
+    box.position.x = x;
+    box.position.y = y;
+    box.position.z = z;
     scene.add(box);
-
-    const speed = 0.02;
-    const textureOffsetSpeed = 0.02;
 
     function update(time) {
         
