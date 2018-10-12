@@ -2,21 +2,25 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 //import Header from "./Header.js"
-import threeEntryPoint from "./threejs/threeEntryPoint"
+import threeEntryPoint from "./threejs/threeEntryPoint";
+import HelloWorld from "./HelloWorld";
+import Button1 from "./controls/Button1";
 
 class App extends Component {
 
-  componentDidMount() {
-    threeEntryPoint(this.threeRootElement);
-  }
+  // componentDidMount() {
+  //   threeEntryPoint(this.threeRootElement);
+  // }
 
 
   render() {
     return (
       
-    <div className="header-header" ref={element => this.threeRootElement = element} >
-        gogogo
-    </div>
+    //<div className="header-header" ref={element => this.threeRootElement = element} ></div>
+      <div className="App">
+        <HelloWorld/>
+        <Button1 />
+      </div>
     );
   }
 }

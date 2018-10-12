@@ -7,7 +7,7 @@ import Ground from './Ground';
 
 
 
-export default canvas => {
+export default (canvas, nRafters) => {
 
     //alert('hello scenemanager');
 
@@ -96,9 +96,9 @@ export default canvas => {
 
     function createSceneSubjects(scene) {
         var sceneSubjects = [
-            new GeneralLights(scene),
+            new GeneralLights(scene)
             //new SceneSubject(scene),
-            new Rafter(scene, 0)
+            //new Rafter(scene, 0)
             //new Ground(scene)
         ];
 
@@ -128,12 +128,17 @@ export default canvas => {
         // sceneSubjects.push(new Rafter(scene, 8));
         // sceneSubjects.push(new Rafter(scene, 10));
 
-        sceneSubjects = generateRafters(sceneSubjects, 10, -10, 2);
+        sceneSubjects = generateRafters(sceneSubjects, nRafters, -10, 2);
 
 
         var yOffset = 0.5;
         var y = 20 - yOffset;
         sceneSubjects.push(new RafterTop(scene, y))
+
+        var y2 = 30;
+        sceneSubjects.push(new RafterTop(scene, y2))
+
+
 
         return sceneSubjects;
     }

@@ -5,10 +5,9 @@ export default scene => {
 
     var THREE = require('three');
     
-    const lightIn = new THREE.PointLight("#4CAF50", 30, 30);
-    const lightOut = new THREE.PointLight("#2196F3", 10, 30);
-    lightOut.position.set(40,20,40);
-
+    // const lightIn = new THREE.PointLight("#4CAF50", 30, 30);
+    // const lightOut = new THREE.PointLight("#2196F3", 10, 30);
+    // lightOut.position.set(40,20,40);
     //scene.add(lightIn);
     //scene.add(lightOut);
 
