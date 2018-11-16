@@ -1,16 +1,16 @@
 import SceneManager from './SceneManager';
 
-export default (container, n) => {
+export default (container, L, W, La, Wa, H, h) => {
 
     
 
     const canvas = createCanvas(document, container);
-    const sceneManager = new SceneManager(canvas, n);
+    const sceneManager = new SceneManager(canvas, L, W, La, Wa, H, h);
 
     let canvasHalfWidth;
     let canvasHalfHeight;
 
-    alert('threeEntryPoint param (n) = ' + n)
+    // alert('threeEntryPoint param (L) = ' + L)
 
 
     bindEventListeners();

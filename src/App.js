@@ -19,7 +19,7 @@ class App extends Component {
     //<div className="header-header" ref={element => this.threeRootElement = element} ></div>
       <div className="App">
         <HelloWorld/>
-        <Button1 />
+        {/* <Button1 /> */}
       </div>
     );
   }
