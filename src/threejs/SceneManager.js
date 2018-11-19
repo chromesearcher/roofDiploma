@@ -7,11 +7,12 @@ import Ground from './Ground';
 
 
 
-export default (canvas, L_input, W_input, La_input, Wa_input, H_input, h_input) => {
+export default (canvas, L_input, W_input, La_input, Wa_input, H_input, h_input, step_ceil, step_raft) => {
 
     // alert('hello scenemanager');
     // alert(L_input);
 
+    // alert("CEILING" + step_ceil);
 
     var THREE = require('three');
     const clock = new THREE.Clock();
@@ -31,7 +32,10 @@ export default (canvas, L_input, W_input, La_input, Wa_input, H_input, h_input) 
 
     const renderer = buildRender(screenDimensions);
     const camera = buildCamera(screenDimensions);
-    const sceneSubjects = createSceneSubjects(scene);
+    
+    var rendered = createSceneSubjects(scene);
+    const sceneSubjects = rendered[0];
+    
 
 
     renderer.setClearColor(new THREE.Color(0xEEEEEE));
@@ -103,6 +107,8 @@ export default (canvas, L_input, W_input, La_input, Wa_input, H_input, h_input) 
             //new Rafter(scene, 0)
             //new Ground(scene)
         ];
+
+        var data = [];
 
         // HELPERS -----------------------------------------------------------------------------------
 
@@ -189,9 +195,9 @@ export default (canvas, L_input, W_input, La_input, Wa_input, H_input, h_input) 
         // 1 metr = 100
         var N = 10; // koef mashtab
         
-        var L = 1400 / N; //L_input / N; // length of house (along konek) sm. eskiz // 1200
-        var W = 900 / N;// W_input / N; // prolet (width of house) // 900
-        var h_house = 300 / N;//H_input / N; // 300
+        var L = L_input / N; // length of house (along konek) sm. eskiz // 1200 1400 / N; //
+        var W = W_input / N; // prolet (width of house) // 900 900 / N;//
+        var h_house = H_input / N; // 300 300 / N;//
         var houseGeo = new THREE.BoxBufferGeometry( L - 0.1, h_house*2 - 0.1, W - 0.1 );
         var houseMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.5, transparent: true } );
         var houseMesh = new THREE.Mesh( houseGeo, houseMaterial );
@@ -200,8 +206,8 @@ export default (canvas, L_input, W_input, La_input, Wa_input, H_input, h_input) 
 
         // ANNEX
         var h_annex = h_house;
-        var La = 500 / N;//La_input / N; // length of house (along konek) sm. eskiz // 500
-        var Wa = 400 / N;//Wa_input / N; // width of annex // 400
+        var La = La_input / N; // length of house (along konek) sm. eskiz // 500 500 / N;//
+        var Wa = Wa_input / N; // width of annex // 400 400 / N;//
         houseGeo = new THREE.BoxBufferGeometry( La - 0.1, h_annex*2 - 0.1, Wa - 0.1 );
         houseMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.5, transparent: true } );
         houseMesh = new THREE.Mesh( houseGeo, houseMaterial );
@@ -343,7 +349,8 @@ export default (canvas, L_input, W_input, La_input, Wa_input, H_input, h_input) 
         var ceilingGeo = new THREE.BoxBufferGeometry( W - 2*w_wall + mauerlat_thickness , ceiling_width, ceiling_thickness );
         // var mauerlatMaterial = new THREE.MeshBasicMaterial( { color: 0x884535, opacity: 0.8, transparent: true } );
         
-        var step_ceiling = 80 / N; // step of balok perekrytiya 0.6 - 1 m (60-100 sm)
+        var step_ceiling = step_ceil; //80 / N; // step of balok perekrytiya 0.6 - 1 m (60-100 sm)
+        // alert(step_ceiling)
         var ceiling_delta = 5 / N;// + ceiling_thickness / 2; // otstup from wall
 
         var l = L / 2 - w_wall - ceiling_delta;
@@ -423,7 +430,7 @@ export default (canvas, L_input, W_input, La_input, Wa_input, H_input, h_input) 
 
         // STANDS (stoyki) ---------------------------------------------------------------------------
 
-        var h_stand = 300 / N; //h_input / N; // 300
+        var h_stand = h_input / N; // 300 300 / N; //
 
         var stand_width = 15 / N;
         var stand_thickness = 10 / N;
@@ -546,7 +553,7 @@ export default (canvas, L_input, W_input, La_input, Wa_input, H_input, h_input) 
 
         // USUAL RAFTERS
 
-        var step_rafter = 60 / N; // step of stands < 2m (200 sm)
+        var step_rafter = step_raft;//60 / N; // step of stands < 2m (200 sm)
 
         var l =  (L / 2 - w_wall - ceiling_delta - ceiling_thickness - rafter_thickness) - (La / 2 + w_sves + rafter_thickness);
         var step = step_rafter + rafter_thickness;
@@ -1003,5 +1010,6 @@ export default (canvas, L_input, W_input, La_input, Wa_input, H_input, h_input) 
         update,
         onWindowResize,
         onMouseMove
+        // data
     }
 }

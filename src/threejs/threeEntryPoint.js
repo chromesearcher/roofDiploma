@@ -1,11 +1,11 @@
 import SceneManager from './SceneManager';
 
-export default (container, L, W, La, Wa, H, h) => {
+export default (container, L, W, La, Wa, H, h, step_ceil, step_raft) => {
 
-    
+   
 
     const canvas = createCanvas(document, container);
-    const sceneManager = new SceneManager(canvas, L, W, La, Wa, H, h);
+    const sceneManager = new SceneManager(canvas, L, W, La, Wa, H, h, step_ceil, step_raft);
 
     let canvasHalfWidth;
     let canvasHalfHeight;
