@@ -89,14 +89,14 @@ class MainR extends Component {
 
     var l1 = 14;
     var l2 = 3;
-    var l3 = W;//14;
+    var l3 = 14;
     var l4 = 5.4;
     var l5 = 4.5;
     var l6 = 7;
 
     var l1_a = 12;
     var l2_a = 1.5;
-    var l3_a = Wa;//4;
+    var l3_a = 4;
     var l4_a = 3.9;
     var l5_a = 5;
 
@@ -259,55 +259,58 @@ class MainR extends Component {
 
   handleButton() {
 
+    var N = 10; // koef mashtab
+
+    var L = parseFloat(this.state.L) / N;
+    var W = parseFloat(this.state.W) / N;
+    var La = parseFloat(this.state.La) / N;
+    var Wa = parseFloat(this.state.Wa) / N;
+    var H = parseFloat(this.state.H) / N;
+    var h = parseFloat(this.state.h) / N;
+
 
     var val = parseFloat(this.state.L);
 
     if (val < 700 || val > 1400) {
       alert("Недопустимая длина крыши");
-    } else {
       return;
-    }
+    } 
 
 
     var val = parseFloat(this.state.W);
 
     if (val < 600 || val > 1200) {
       alert("Недопустимая ширина крыши");
-    } else {
       return;
-    }
+    } 
 
     var val = parseFloat(this.state.La);
 
     if (val < 300 || val > 600) {
       alert("Недопустимая длина пристройки");
-    } else {
       return;
-    }
+    } 
     
     var val = parseFloat(this.state.Wa);
 
     if (val < 300 || val > 600) {
       alert("Недопустимая ширина пристройки");
-    } else {
       return;
-    }
+    } 
 
     var val = parseFloat(this.state.H);
 
     if (val < 300 || val > 1000) {
       alert("Недопустимая высота дома");
-    } else {
       return;
-    }
+    } 
 
     var val = parseFloat(this.state.h);
 
-    if (val < 200 || val > 900) {
+    if (val < 200 || val > 550) {
       alert("Недопустимая высота крыши");
-    } else {
       return;
-    }
+    } 
 
 
     // var printBlock = document.getElementById("printBlock");
@@ -318,14 +321,7 @@ class MainR extends Component {
 
     // TODO check that nRafters is ok (not a bitch string, but a proper number)
 
-    var N = 10; // koef mashtab
-
-    var L = parseInt(this.state.L, 10) / N;
-    var W = parseInt(this.state.W, 10) / N;
-    var La = parseInt(this.state.La, 10) / N;
-    var Wa = parseInt(this.state.Wa, 10) / N;
-    var H = parseInt(this.state.H, 10) / N;
-    var h = parseInt(this.state.h, 10) / N;
+    
     //alert('button handler: nRafters = ' + n);
     // alert('button handler: canvas1 = ' + this.state.canvas1);
     // this.state.canvas1.remove();
@@ -388,7 +384,7 @@ class MainR extends Component {
     var l = L / 2 - w_wall - ceiling_delta;
     var step = step_ceiling + ceiling_thickness;
     var nceiling = Math.floor( l / step ); //чтобы отбросить дробную часть
-    alert(nceiling);
+    // alert(nceiling);
     // alert(nceiling)
 
     nceiling = nceiling*4;
@@ -597,17 +593,17 @@ class MainR extends Component {
     
 
     var textM = "Необходимо: \n";
-    textM += 1 + " доска сечением 50х250 длиной " + L_konek/N + " м (конек дома)\n";
-    textM += 1 + " доска сечением 50х250 длиной " + l_konek_a/N + " м (конек пристройки)\n";
-    textM += nstand_a + " досок сечением 50x100 длиной " + L_stand + " м (стойки основного дома)\n";
-    textM += 1 + " доска сечением 50x100 длиной " + L_stand / 2.1 + " м (стойка пристройки)\n"; // fix
-    textM += 2 + " бруска сечением 150x150 длиной " + Lm/N + " м (мауэрлаты дома)\n";
-    textM += 2 + " бруска сечением 150x150 длиной "  + Lm_a/N + " м (мауэрлаты пристройки)\n";
-    textM += (nrafters + nnaroz*4) + " досок сечением 50x200 длиной " + Lrafter/N + " м (стропила дома)\n";
-    textM += (nrafters_a + nnaroz*2) + " досок сечением 50x200 длиной " + Lrafter_a/N + " м (стропила пристройки)\n";
-    textM += nceiling + " доски сечением 50x200 длиной " + Lceiling/N + " м (балки перекрытия дома)\n";
-    textM += nceiling_a + " досок сечением 50x200 длиной " + Lceiling_a/N + " м (балки перекрытия пристройки)\n";
-    textM += 2 + " доски сечением 50x200 длиной " + l_endova/N + " м (ендовы)\n";
+    textM += 1 + " доска сечением 50х250 длиной " + (L_konek/N).toFixed(2) + " м (конек дома)\n";
+    textM += 1 + " доска сечением 50х250 длиной " + (l_konek_a/N).toFixed(2) + " м (конек пристройки)\n";
+    textM += nstand_a + " досок сечением 50x100 длиной " + (L_stand).toFixed(2) + " м (стойки основного дома)\n";
+    textM += 1 + " доска сечением 50x100 длиной " + (L_stand / 2.1).toFixed(2) + " м (стойка пристройки)\n"; // fix
+    textM += 2 + " бруска сечением 150x150 длиной " + (Lm/N).toFixed(2) + " м (мауэрлаты дома)\n";
+    textM += 2 + " бруска сечением 150x150 длиной "  + (Lm_a/N).toFixed(2) + " м (мауэрлаты пристройки)\n";
+    textM += (nrafters + nnaroz*4) + " досок сечением 50x200 длиной " + (Lrafter/N).toFixed(2) + " м (стропила дома)\n";
+    textM += (nrafters_a + nnaroz*2) + " досок сечением 50x200 длиной " + (Lrafter_a/N).toFixed(2) + " м (стропила пристройки)\n";
+    textM += nceiling + " доски сечением 50x200 длиной " + (Lceiling/N).toFixed(2) + " м (балки перекрытия дома)\n";
+    textM += nceiling_a + " досок сечением 50x200 длиной " + (Lceiling_a/N).toFixed(2) + " м (балки перекрытия пристройки)\n";
+    textM += 2 + " доски сечением 50x200 длиной " + (l_endova/N).toFixed(2) + " м (ендовы)\n";
     textM += "\n";
     textM += S/(N*N) + " м2 металлочерепицы" + "\n"; 
     textM += "\n";
@@ -652,27 +648,27 @@ class MainR extends Component {
         <br />
 
 
-        <label htmlFor="name" id='inputL'>Длина дома(L), см:            </label>
+        <label htmlFor="name" id='inputL'>Длина дома(L), см [700-1400]:            </label>
         <input type="text" tabindex = "3" id="inputL" onChange={this.changeL} />
         <br />
          
-        <label htmlFor="name" id='inputW'>Ширина дома(W), см:           </label>
+        <label htmlFor="name" id='inputW'>Ширина дома(W), см [600-1200]:           </label>
         <input type="text" tabindex = "4" id="inputW" onChange={this.changeW} />
         <br />
 
-        <label htmlFor="name" id='inputLa'>Длина пристройки (La), см:   </label>
+        <label htmlFor="name" id='inputLa'>Длина пристройки (La), см [300-600]:   </label>
         <input type="text" tabindex = "5" id="inputLa" onChange={this.changeLa} />
         <br />
 
-        <label htmlFor="name" id='inputWa'>Ширина пристройки (Wa), см:  </label>
+        <label htmlFor="name" id='inputWa'>Ширина пристройки (Wa), см [300-600]:  </label>
         <input type="text" tabindex = "6" id="inputWa" onChange={this.changeWa} />
         <br />
 
-        <label htmlFor="name" id='inputH'>Высота дома (H), см:          </label>
+        <label htmlFor="name" id='inputH'>Высота дома (H), см [300 - 1000]:          </label>
         <input type="text" tabindex = "7" id="inputH" onChange={this.changeH} />
         <br />
 
-        <label htmlFor="name" id='inputh'>Высота крыши (h), см:         </label>
+        <label htmlFor="name" id='inputh'>Высота крыши (h), см [200 - 550]:         </label>
         <input type="text" tabindex = "8" id="inputh" onChange={this.changeh} />
         <br />
 
