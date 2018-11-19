@@ -113,7 +113,7 @@ class MainR extends Component {
     var n4_a = 12;
     var n5_a = 5;
 
-    var S = 210;
+    var S = 180;
 
     var step1 = 0.6;
     var step2 = 1.0;
@@ -331,6 +331,82 @@ class MainR extends Component {
     threeD.removeChild(threeD.children[0]);
 
 
+    var sr_index = this.state.SR;
+    var wr_index = this.state.WR;
+
+    var sr_value = 0;
+    var wr_value = 0;
+
+    switch(sr_index) {
+
+      case 1:
+        sr_value = 80;
+        break;
+
+      case 2:
+        sr_value = 120;
+        break;
+
+      case 3:
+        sr_value = 180;
+        break;
+
+      case 4:
+        sr_value = 240;
+        break;
+
+      case 5:
+        sr_value = 320;
+        break;
+
+      case 6:
+        sr_value = 400;
+        break;
+
+      case 7:
+        sr_value = 480;
+        break;
+
+      case 8:
+        sr_value = 560;
+        break;
+    }
+
+    switch(wr_index) {
+
+      case 1:
+        wr_value = 24;
+        break;
+
+      case 2:
+        wr_value = 32;
+        break;
+
+      case 3:
+        wr_value = 42;
+        break;
+
+      case 4:
+        wr_value = 53;
+        break;
+
+      case 5:
+        wr_value = 67;
+        break;
+
+      case 6:
+        wr_value = 84;
+        break;
+
+      case 7:
+        wr_value = 100;
+        break;
+
+      case 8:
+        wr_value = 120;
+        break;
+    }
+
     var step_raft = 0.6;
 
     var load = sr_value + wr_value + 5;
@@ -508,87 +584,13 @@ class MainR extends Component {
 
     var l_endova = Math.sqrt(Math.pow(y_diag, 2) + Math.pow(x_diag, 2));
 
-    var S = L*W*2 + La*Wa*2;
+    var S = L*Lrafter*2 + La*Lrafter_a*2;
 
-    var step1 = 0.6;
-    var step2 = 1.0;
+    // var step1 = 0.6;
+    // var step2 = 1.0;
 
 
-    var sr_index = this.state.SR;
-    var wr_index = this.state.WR;
-
-    var sr_value = 0;
-    var wr_value = 0;
-
-    switch(sr_index) {
-
-      case 1:
-        sr_value = 80;
-        break;
-
-      case 2:
-        sr_value = 120;
-        break;
-
-      case 3:
-        sr_value = 180;
-        break;
-
-      case 4:
-        sr_value = 240;
-        break;
-
-      case 5:
-        sr_value = 320;
-        break;
-
-      case 6:
-        sr_value = 400;
-        break;
-
-      case 7:
-        sr_value = 480;
-        break;
-
-      case 8:
-        sr_value = 560;
-        break;
-    }
-
-    switch(wr_index) {
-
-      case 1:
-        wr_value = 24;
-        break;
-
-      case 2:
-        wr_value = 32;
-        break;
-
-      case 3:
-        wr_value = 42;
-        break;
-
-      case 4:
-        wr_value = 53;
-        break;
-
-      case 5:
-        wr_value = 67;
-        break;
-
-      case 6:
-        wr_value = 84;
-        break;
-
-      case 7:
-        wr_value = 100;
-        break;
-
-      case 8:
-        wr_value = 120;
-        break;
-    }
+    
 
     
 
@@ -605,7 +607,7 @@ class MainR extends Component {
     textM += nceiling_a + " досок сечением 50x200 длиной " + (Lceiling_a/N).toFixed(2) + " м (балки перекрытия пристройки)\n";
     textM += 2 + " доски сечением 50x200 длиной " + (l_endova/N).toFixed(2) + " м (ендовы)\n";
     textM += "\n";
-    textM += S/(N*N) + " м2 металлочерепицы" + "\n"; 
+    textM += (S/(N*N)).toFixed(1) + " м2 металлочерепицы" + "\n"; 
     textM += "\n";
     textM += "Шаг стропил равен " + step_raft + " м\n";
     textM += "Шаг балок перекрытия равен " + step_ceil + " м\n";
