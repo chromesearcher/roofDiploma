@@ -410,9 +410,9 @@ class MainR extends Component {
     var step_raft = 0.6;
     
     var load = sr_value + wr_value + 5;
-    alert(sr_index);
-    alert(wr_index);
-    alert(load);
+    // alert(sr_index);
+    // alert(wr_index);
+    // alert(load);
 
     if (load < 120) {
       step_raft = 0.9;
