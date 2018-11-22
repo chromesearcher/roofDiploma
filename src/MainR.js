@@ -339,77 +339,80 @@ class MainR extends Component {
 
     switch(sr_index) {
 
-      case 1:
+      case "1":
         sr_value = 80;
         break;
 
-      case 2:
+      case "2":
         sr_value = 120;
         break;
 
-      case 3:
+      case "3":
         sr_value = 180;
         break;
 
-      case 4:
+      case "4":
         sr_value = 240;
         break;
 
-      case 5:
+      case "5":
         sr_value = 320;
         break;
 
-      case 6:
+      case "6":
         sr_value = 400;
         break;
 
-      case 7:
+      case "7":
         sr_value = 480;
         break;
 
-      case 8:
+      case "8":
         sr_value = 560;
         break;
     }
 
     switch(wr_index) {
 
-      case 1:
+      case "1":
         wr_value = 24;
         break;
 
-      case 2:
+      case "2":
         wr_value = 32;
         break;
 
-      case 3:
+      case "3":
         wr_value = 42;
         break;
 
-      case 4:
+      case "4":
         wr_value = 53;
         break;
 
-      case 5:
+      case "5":
         wr_value = 67;
         break;
 
-      case 6:
+      case "6":
         wr_value = 84;
         break;
 
-      case 7:
+      case "7":
         wr_value = 100;
         break;
 
-      case 8:
+      case "8":
         wr_value = 120;
         break;
     }
 
     var step_raft = 0.6;
-
+    
     var load = sr_value + wr_value + 5;
+    alert(sr_index);
+    alert(wr_index);
+    alert(load);
 
     if (load < 120) {
       step_raft = 0.9;

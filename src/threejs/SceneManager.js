@@ -53,7 +53,7 @@ export default (canvas, L_input, W_input, La_input, Wa_input, H_input, h_input, 
     // controls.keys = [ 65, 83, 68 ];
     //controls.addEventListener( 'change', update );
     var OrbitControls = require('three-orbit-controls')(THREE)
-    var controls = new OrbitControls( camera );
+    var controls = new OrbitControls( camera, canvas );
 
     controls.update();
     
